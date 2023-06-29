@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ScoreEntry } from 'src/app/interfaces/scoreboard.interface';
-import { AuthService } from 'src/app/services/auth.service';
-import { ScoreboardService } from 'src/app/services/scoreboard.service';
+import { ScoreEntry } from '../../interfaces/scoreboard.interface';
+import { AuthService } from '../../services/auth.service';
+import { ScoreboardService } from '../../services/scoreboard.service';
 
 @Component({
   standalone: true,

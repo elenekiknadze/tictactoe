@@ -5,7 +5,7 @@ import {
   BoardState,
   Coordinates,
   ResolverService,
-} from 'src/app/services/resolver.service';
+} from '../../services/resolver.service';
 import { AuthService } from '../../services/auth.service';
 import { ScoreboardService } from '../../services/scoreboard.service';
 import { TileComponent } from '../tile/tile.component';
@@ -13,9 +13,9 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { NameYourselfComponent } from '../name-yourself/name-yourself.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { PlayerData } from 'src/app/interfaces/playerdata.interface';
+import { PlayerData } from '../../interfaces/playerdata.interface';
 import { ScoreIconComponent } from '../score-icon/score-icon.component';
-import { GameState, MODES } from 'src/app/interfaces/game.interface';
+import { GameState, MODES } from '../../interfaces/game.interface';
 
 const BOARD_SIZE = 3;
 

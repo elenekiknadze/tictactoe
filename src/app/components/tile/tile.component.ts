@@ -6,7 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { TileValue } from 'src/app/services/resolver.service';
+import { TileValue } from '../../services/resolver.service';
 
 @Component({
   standalone: true,

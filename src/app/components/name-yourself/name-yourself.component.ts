@@ -7,8 +7,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { Player } from 'src/app/enums/players.type';
-import { PlayerData } from 'src/app/interfaces/playerdata.interface';
+import { Player } from '../../enums/players.type';
+import { PlayerData } from '../../interfaces/playerdata.interface';
 
 @Component({
   standalone: true,
