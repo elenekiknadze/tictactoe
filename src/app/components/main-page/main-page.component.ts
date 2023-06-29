@@ -38,6 +38,7 @@ export class MainPageComponent implements OnInit {
   firstRow = [0, 1, 2];
   secondRow = [3, 4, 5];
   thirdRow = [6, 7, 8];
+  boardState = BoardState;
 
   constructor(
     public readonly authService: AuthService,
@@ -62,6 +63,25 @@ export class MainPageComponent implements OnInit {
     this.checkGameOver();
   }
 
+  get titleString() {
+    const boardState = this.gameState.state;
+    const currentPlayer = this.authService.player;
+    const name = this.authService.name;
+    if (boardState === BoardState.UNFINISHED) {
+      return `Whats your move ${name}?`;
+    }
+    if (boardState === BoardState.DRAW) {
+      return "It's a draw, try again?";
+    }
+    if (
+      (boardState === BoardState.WINX && currentPlayer === 'x') ||
+      (boardState === BoardState.LOSEX && currentPlayer === 'o')
+    ) {
+      return 'You won!';
+    }
+    return 'You lost :(';
+  }
+
   checkGameOver() {
     const coords = this.resolver.getCoordinates(this.gameState.tictactoe);
     const res = this.resolver.resolveBoard(
@@ -71,6 +91,7 @@ export class MainPageComponent implements OnInit {
     if (res.state !== BoardState.UNFINISHED) {
       this.gameState.isGameOver = true;
       this.gameState.winningSequence = res.sequence;
+      this.gameState.state = res.state;
       this.registerScore(res, coords);
     }
   }
@@ -144,6 +165,7 @@ function blankSlate(): GameState {
     currentMode: MODES.EASY,
     startTime: new Date(),
     winningSequence: [],
+    state: BoardState.UNFINISHED,
   };
 }
 

@@ -1,7 +1,11 @@
-<app-score-icon>
-</app-score-icon>
 
 <div class="page-container">
+    <app-score-icon>
+    </app-score-icon>
+    
+    <h1 class="title">
+        {{titleString}}
+    </h1>
     <div class="board">
         <div class="row">
             <app-tile [highlight]="isInWinningSequence(index)" *ngFor="let index of firstRow" [isDisabled]="getDisabledStatus(index)" (click)="makeMove(index)" [state]="gameState.tictactoe[index]"></app-tile>
