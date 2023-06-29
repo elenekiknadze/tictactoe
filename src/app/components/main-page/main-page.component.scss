@@ -1,0 +1,26 @@
+button{
+    width:40px;
+    height:40px;
+}
+
+.row{
+    display:flex;
+}
+
+.page-container{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+button{
+    width: 200px;
+    margin-top: 20px;
+}
+
+.board{
+    position:relative;
+}
+

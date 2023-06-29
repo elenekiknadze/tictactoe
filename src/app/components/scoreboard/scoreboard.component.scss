@@ -1,0 +1,26 @@
+.score-entry{
+    padding: 10px 40px;
+}
+
+:host{
+    padding: 20px 0;
+    display: block;
+}
+
+h1{
+    text-align: center;
+}
+
+div.highlight{
+    border: 1px solid orange;
+    .score{
+        border-radius: 50%;
+        background-color: orange;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+

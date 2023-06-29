@@ -1,0 +1,21 @@
+<app-score-icon>
+</app-score-icon>
+
+<div class="page-container">
+    <div class="board">
+        <div class="row">
+            <app-tile [highlight]="isInWinningSequence(index)" *ngFor="let index of firstRow" [isDisabled]="getDisabledStatus(index)" (click)="makeMove(index)" [state]="gameState.tictactoe[index]"></app-tile>
+        </div>
+        <div class="row">
+            <app-tile [highlight]="isInWinningSequence(index)" *ngFor="let index of secondRow" [isDisabled]="getDisabledStatus(index)" (click)="makeMove(index)" [state]="gameState.tictactoe[index]"></app-tile>
+        </div>
+        <div class="row">
+            <app-tile [highlight]="isInWinningSequence(index)" *ngFor="let index of thirdRow"  [isDisabled]="getDisabledStatus(index)" (click)="makeMove(index)" [state]="gameState.tictactoe[index]"></app-tile>
+        </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="startNewGame()">Restart</button>
+    <button mat-raised-button color="secondary" (click)="startOver()">Change details</button>
+</div>
+
+
+

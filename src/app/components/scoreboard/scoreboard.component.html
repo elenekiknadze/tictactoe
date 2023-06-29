@@ -1,0 +1,4 @@
+<h1>Top Scores</h1>
+<div class="score-entry" [ngClass]="{'highlight': isCurrentUser(entry)}" *ngFor="let entry of scoreBoard; index as i">
+    {{i+1}}. {{entry.name}} <span class='score'>{{entry.score}}</span>
+</div>

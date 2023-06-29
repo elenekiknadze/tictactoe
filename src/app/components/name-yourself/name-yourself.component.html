@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Choose a name and a weapon</h2>
+<mat-divider></mat-divider>
+<div mat-dialog-content class="mat-dialog-content">
+    <mat-form-field >
+        <mat-label>What's your name?</mat-label>
+        <input matInput [formControl]="nameControl">
+      </mat-form-field>
+
+    <mat-radio-group [formControl]="playerControl" aria-label="Select the player">
+        <mat-radio-button value="x">X</mat-radio-button>
+        <mat-radio-button value="o">O</mat-radio-button>
+    </mat-radio-group>
+</div>
+<mat-divider></mat-divider>
+
+<mat-dialog-actions>
+  <button mat-button color="primary" (click)="start()" [disabled]="nameControl.invalid">Start</button>
+</mat-dialog-actions>
