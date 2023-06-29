@@ -1,4 +1,4 @@
-import { TileValue } from '../services/resolver.service';
+import { BoardState, TileValue } from '../services/resolver.service';
 
 export interface GameState {
   isGameOver: boolean;
@@ -6,10 +6,11 @@ export interface GameState {
   currentMode: MODES;
   startTime: Date;
   winningSequence?: Array<number>;
+  state?: BoardState;
 }
 
 export enum MODES {
-  EASY = 0,
-  AVERAGE = 5,
+  EASY = 3,
+  AVERAGE = 7,
   HARD = 10,
 }
