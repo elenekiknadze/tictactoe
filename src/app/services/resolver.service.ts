@@ -127,7 +127,7 @@ export class ResolverService {
   }
 }
 
-function setContainsArray(set: Set<number>, arr: number[]) {
+export function setContainsArray(set: Set<number>, arr: number[]): boolean {
   for (let i = 0; i < arr.length; i++) {
     if (!set.has(arr[i])) {
       return false;

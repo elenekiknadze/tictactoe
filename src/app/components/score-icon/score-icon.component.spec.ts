@@ -8,7 +8,7 @@ describe('ScoreIconComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ScoreIconComponent]
+      imports: [ScoreIconComponent],
     });
     fixture = TestBed.createComponent(ScoreIconComponent);
     component = fixture.componentInstance;

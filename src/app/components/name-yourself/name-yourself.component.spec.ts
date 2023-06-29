@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NameYourselfComponent } from './name-yourself.component';
 
@@ -8,7 +10,13 @@ describe('NameYourselfComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NameYourselfComponent]
+      imports: [NameYourselfComponent, BrowserAnimationsModule],
+      providers: [
+        {
+          provide: MatDialogRef,
+          useValue: { close: jest.fn() },
+        },
+      ],
     });
     fixture = TestBed.createComponent(NameYourselfComponent);
     component = fixture.componentInstance;
