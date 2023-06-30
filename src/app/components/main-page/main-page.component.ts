@@ -17,8 +17,6 @@ import { PlayerData } from '../../interfaces/playerdata.interface';
 import { ScoreIconComponent } from '../score-icon/score-icon.component';
 import { GameState, MODES } from '../../interfaces/game.interface';
 
-const BOARD_SIZE = 3;
-
 @Component({
   standalone: true,
   imports: [
@@ -39,6 +37,7 @@ export class MainPageComponent implements OnInit {
   secondRow = [3, 4, 5];
   thirdRow = [6, 7, 8];
   boardState = BoardState;
+  currentScore: number | null = null;
 
   constructor(
     public readonly authService: AuthService,
@@ -108,7 +107,7 @@ export class MainPageComponent implements OnInit {
       this.authService.player === 'x' ? coordinates.x.size : coordinates.o.size;
     const score = calculateScore(durationInSeconds, numberOfMoves);
     this.scoreService.addScore({ name: this.authService.name, score });
-    console.log(score, 'scoreee', numberOfMoves, durationInSeconds);
+    this.currentScore = score;
   }
 
   playerWon(boardData: BoardData) {
@@ -144,6 +143,7 @@ export class MainPageComponent implements OnInit {
 
   startNewGame() {
     this.gameState = blankSlate();
+    this.currentScore = null;
     if (this.authService.player === 'o') {
       const moveRes = this.resolver.bestMoveResolver(
         this.gameState.tictactoe,
@@ -162,7 +162,7 @@ function blankSlate(): GameState {
   return {
     isGameOver: false,
     tictactoe: new Array(9).fill(''),
-    currentMode: MODES.EASY,
+    currentMode: MODES.AVERAGE,
     startTime: new Date(),
     winningSequence: [],
     state: BoardState.UNFINISHED,

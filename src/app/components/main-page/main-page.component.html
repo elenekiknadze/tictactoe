@@ -2,6 +2,8 @@
 <div class="page-container">
     <app-score-icon>
     </app-score-icon>
+
+    <div class="current-score" *ngIf="currentScore">{{currentScore}}</div>
     
     <h1 class="title">
         {{titleString}}
