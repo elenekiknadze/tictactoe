@@ -16,6 +16,9 @@ import { MatCardModule } from '@angular/material/card';
 import { PlayerData } from '../../interfaces/playerdata.interface';
 import { ScoreIconComponent } from '../score-icon/score-icon.component';
 import { GameState, MODES } from '../../interfaces/game.interface';
+import { TimerService } from 'src/app/services/timer.service';
+import { PushPipe } from '@ngrx/component';
+import { take } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -26,6 +29,7 @@ import { GameState, MODES } from '../../interfaces/game.interface';
     MatButtonModule,
     MatCardModule,
     ScoreIconComponent,
+    PushPipe,
   ],
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -43,11 +47,13 @@ export class MainPageComponent implements OnInit {
     public readonly authService: AuthService,
     public readonly scoreService: ScoreboardService,
     private readonly resolver: ResolverService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    public readonly timer: TimerService
   ) {}
 
   makeMove(index: number) {
     this.gameState.tictactoe[index] = this.authService.player;
+
     this.checkGameOver();
     if (this.gameState.isGameOver) return;
     const randomNumber = Math.floor(MODES.HARD * Math.random());
@@ -96,16 +102,13 @@ export class MainPageComponent implements OnInit {
   }
 
   registerScore(boardData: BoardData, coordinates: Coordinates) {
+    this.timer.stopCounter();
     if (!this.playerWon(boardData)) {
       return;
     }
-    const endTime = new Date();
-    const durationInSeconds = Math.floor(
-      (endTime.getTime() - this.gameState.startTime.getTime()) / 1000
-    );
     const numberOfMoves =
       this.authService.player === 'x' ? coordinates.x.size : coordinates.o.size;
-    const score = calculateScore(durationInSeconds, numberOfMoves);
+    const score = calculateScore(this.timer.counter, numberOfMoves);
     this.scoreService.addScore({ name: this.authService.name, score });
     this.currentScore = score;
   }
@@ -142,6 +145,7 @@ export class MainPageComponent implements OnInit {
   }
 
   startNewGame() {
+    this.timer.startCounter();
     this.gameState = blankSlate();
     this.currentScore = null;
     if (this.authService.player === 'o') {
@@ -170,5 +174,5 @@ function blankSlate(): GameState {
 }
 
 function calculateScore(duration: number, moves: number): number {
-  return 100 - (moves + duration);
+  return Math.floor(100 / (moves + duration * 0.8));
 }
