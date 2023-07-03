@@ -17,15 +17,14 @@ export class TimerService {
     this._counter = 0;
     this.interval = setInterval(() => {
       this._counter++;
-      console.log('timer');
     }, 1000);
-    console.log(this.interval);
   }
 
   stopCounter() {
     const interval = this.interval;
     if (interval) {
       clearInterval(interval);
+      this.interval = undefined;
     }
   }
 }

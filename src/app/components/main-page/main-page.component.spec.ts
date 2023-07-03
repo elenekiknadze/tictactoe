@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialog } from '@angular/material/dialog';
 import { ResolverService } from '../../services/resolver.service';
 import { AuthService } from '../../services/auth.service';
 import { ScoreboardService } from '../../services/scoreboard.service';
 
 import { MainPageComponent } from './main-page.component';
+import { TimerService } from '../../services/timer.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const MAT_DIALOG_MOCK = {
   open: () => ({
@@ -17,7 +18,7 @@ describe('MainPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MainPageComponent],
+      imports: [MainPageComponent, BrowserAnimationsModule],
       providers: [
         {
           provide: AuthService,
@@ -27,10 +28,14 @@ describe('MainPageComponent', () => {
           provide: ScoreboardService,
           useValue: { addScore: jest.fn() },
         },
-        // {
-        //   provide: MatDialog,
-        //   useValue: MAT_DIALOG_MOCK,
-        // },
+        {
+          provide: TimerService,
+          useValue: {
+            stopCounter: jest.fn(),
+            startCounter: jest.fn(),
+            counter: 0,
+          },
+        },
         ResolverService,
       ],
     });
