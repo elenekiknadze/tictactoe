@@ -1,9 +1,12 @@
-// .mat-dialog-content{
-//     input{
-//         display:block;
-//     }
-// }
+
 
 mat-divider{
     color:lightgray;
+}
+
+
+@media only screen and (max-width: 500px) {
+    mat-radio-group{
+        display: block !important;
+    }
 }

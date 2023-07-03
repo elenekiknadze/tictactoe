@@ -16,9 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { PlayerData } from '../../interfaces/playerdata.interface';
 import { ScoreIconComponent } from '../score-icon/score-icon.component';
 import { GameState, MODES } from '../../interfaces/game.interface';
-import { TimerService } from 'src/app/services/timer.service';
-import { PushPipe } from '@ngrx/component';
-import { take } from 'rxjs';
+import { TimerService } from '../../services/timer.service';
 
 @Component({
   standalone: true,
@@ -29,7 +27,6 @@ import { take } from 'rxjs';
     MatButtonModule,
     MatCardModule,
     ScoreIconComponent,
-    PushPipe,
   ],
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
