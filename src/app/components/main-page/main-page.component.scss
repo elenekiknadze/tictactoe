@@ -43,5 +43,11 @@ app-tile{
             font-size: 30px;
         
     }
+
+    &:active{
+        scale: 0.95;
+        transition-property: scale;
+        transition-duration: 0.1s;
+    }
     
 }
