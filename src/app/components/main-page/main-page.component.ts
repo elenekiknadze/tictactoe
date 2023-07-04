@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   BoardData,
   BoardState,
@@ -17,6 +17,10 @@ import { PlayerData } from '../../interfaces/playerdata.interface';
 import { ScoreIconComponent } from '../score-icon/score-icon.component';
 import { GameState, MODES } from '../../interfaces/game.interface';
 import { TimerService } from '../../services/timer.service';
+import {
+  ScoreboardBaseService,
+  SCOREBOARD_SERVICE_TOKEN,
+} from '../../services/scoreboard.abstract.service';
 
 @Component({
   standalone: true,
@@ -31,6 +35,12 @@ import { TimerService } from '../../services/timer.service';
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
+  providers: [
+    {
+      provide: SCOREBOARD_SERVICE_TOKEN,
+      useExisting: ScoreboardService,
+    },
+  ],
 })
 export class MainPageComponent implements OnInit {
   gameState: GameState = blankSlate();
@@ -42,7 +52,8 @@ export class MainPageComponent implements OnInit {
 
   constructor(
     public readonly authService: AuthService,
-    public readonly scoreService: ScoreboardService,
+    @Inject(SCOREBOARD_SERVICE_TOKEN)
+    public readonly scoreService: ScoreboardBaseService,
     private readonly resolver: ResolverService,
     private readonly dialog: MatDialog,
     public readonly timer: TimerService
@@ -105,7 +116,10 @@ export class MainPageComponent implements OnInit {
     }
     const numberOfMoves =
       this.authService.player === 'x' ? coordinates.x.size : coordinates.o.size;
-    const score = calculateScore(this.timer.counter, numberOfMoves);
+    const score = this.scoreService.calculateScore(
+      this.timer.counter,
+      numberOfMoves
+    );
     this.scoreService.addScore({ name: this.authService.name, score });
     this.currentScore = score;
   }
@@ -168,8 +182,4 @@ function blankSlate(): GameState {
     winningSequence: [],
     state: BoardState.UNFINISHED,
   };
-}
-
-function calculateScore(duration: number, moves: number): number {
-  return Math.floor(100 / (moves + duration * 0.8));
 }
