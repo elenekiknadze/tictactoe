@@ -14,11 +14,25 @@ h1{
 div.highlight{
     .score{
         border-radius: 50%;
-        background-color: orange;
-        width: 20px;
-        height: 20px;
         display: inline-block;
         text-align: center;
+        position: relative;
+        z-index:1;
+    }
+
+    .score::before{
+        content: "";
+        width: 120%;
+        display: block;
+        height: 0;
+        padding-bottom: 120%;
+        position: absolute;
+        background-color: orange;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+        transform: translate3d(-50%, -50%, 0);
     }
 }
 
