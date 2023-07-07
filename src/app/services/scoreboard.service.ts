@@ -8,6 +8,6 @@ import { ScoreboardBaseService } from './scoreboard.abstract.service';
 })
 export class ScoreboardService extends ScoreboardBaseService {
   calculateScore(duration: number, moves: number): number {
-    return Math.ceil(300 / moves + duration / 10);
+    return Math.ceil(300 / moves) - Math.ceil(duration / 5);
   }
 }
